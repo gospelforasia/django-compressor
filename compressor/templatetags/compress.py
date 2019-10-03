@@ -140,7 +140,10 @@ class CompressorNode(CompressorMixin, template.Node):
         if self.debug_mode(context):
             return self.get_original_content(context)
 
-        return self.render_compressed(context, self.kind, self.mode, forced=forced)
+        try:
+            return self.render_compressed(context, self.kind, self.mode, forced=forced)
+        except:
+            return self.get_original_content(context)
 
 
 @register.tag
